@@ -3,14 +3,14 @@ export class ClosePage {
      {
         this.page = page;
 
-         //Login details
-        this.loginbutton = page.locator('#login2');
-        this.username = page.locator('#loginusername');
-        this.password = page.locator('#loginpassword');
-        this.button = page.locator('//button[@onclick="logIn()"]');
+         //Signup details
+        this.signupbutton = page.locator('#signin2');
+        this.username = page.locator('#sign-username');
+        this.password = page.locator('#sign-password');
+        this.button = page.locator("//button[text()='Sign up']");
 
         //close button in login 
-        this.closebutton = page.locator('#logInModal button.btn-secondary');
+        this.closebutton = page.locator('#signInModal button.btn-secondary');
 
 
     }
@@ -22,7 +22,7 @@ export class ClosePage {
 
     async close(username,password)
     {
-    await this.loginbutton.click();
+    await this.signupbutton.click();
     await this.username.waitFor({ state: 'visible' });
     await this.username.fill(username);
     await this.password.fill(password);

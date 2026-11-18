@@ -116,8 +116,6 @@ async order(name, country, city, creditcard, month, year)
 
 }
 
-
-
 async logout()
 {
     await this.logoutbutton.click()
