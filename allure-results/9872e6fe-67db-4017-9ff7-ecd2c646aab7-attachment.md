@@ -1,0 +1,112 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Login.spec.js >> Verify Login with valid credentials
+- Location: tests\Login.spec.js:5:6
+
+# Error details
+
+```
+Error: expect(locator).toContainText(expected) failed
+
+Locator: locator('#nameofuser')
+Expected substring: "Welcome"
+Received string:    ""
+Timeout: 5000ms
+
+Call log:
+  - Expect "toContainText" locator('#nameofuser') with timeout 5000ms
+  - waiting for locator('#nameofuser')
+    - locator resolved to <a href="#" id="nameofuser" class="nav-link"></a>
+    - unexpected value ""
+    - waiting for "https://www.demoblaze.com/" navigation to finish...
+    - navigated to "https://www.demoblaze.com/"
+    11 × locator resolved to <a href="#" id="nameofuser" class="nav-link"></a>
+       - unexpected value ""
+
+```
+
+```yaml
+- navigation:
+  - link "PRODUCT STORE":
+    - /url: index.html
+    - img
+    - text: PRODUCT STORE
+  - list:
+    - listitem:
+      - link "Home (current)":
+        - /url: index.html
+    - listitem:
+      - link "Contact":
+        - /url: "#"
+    - listitem:
+      - link "About us":
+        - /url: "#"
+    - listitem:
+      - link "Cart":
+        - /url: cart.html
+    - listitem:
+      - link "Log in":
+        - /url: "#"
+    - listitem
+    - listitem
+    - listitem:
+      - link "Sign up":
+        - /url: "#"
+  - list:
+    - listitem
+    - listitem
+    - listitem
+  - img "First slide"
+  - button "Previous"
+  - button "Next"
+- link "CATEGORIES":
+  - /url: ""
+- link "Phones":
+  - /url: "#"
+- link "Laptops":
+  - /url: "#"
+- link "Monitors":
+  - /url: "#"
+- list:
+  - listitem:
+    - button "Previous"
+  - listitem:
+    - button "Next"
+- heading "About Us" [level=4]
+- paragraph: We believe performance needs to be validated at every stage of the software development cycle and our open source compatible, massively scalable platform makes that a reality.
+- heading "Get in Touch" [level=4]
+- paragraph: "Address: 2390 El Camino Real"
+- paragraph: "Phone: +440 123456"
+- paragraph: "Email: demo@blazemeter.com"
+- heading "PRODUCT STORE" [level=4]:
+  - img
+  - text: PRODUCT STORE
+- contentinfo:
+  - paragraph: Copyright © Product Store
+```
+
+# Test source
+
+```ts
+  1  | import { Loginpage } from '../Pages/login'
+  2  | import{test,expect} from '@playwright/test'
+  3  | import validLogindata from '../Utils/logincredentials.json'
+  4  | 
+  5  | test.only('Verify Login with valid credentials',async({page})=>{
+  6  |     const loginpage = new Loginpage(page)
+  7  |     const usernamevalue = validLogindata.username
+  8  |     const passwordvalue = validLogindata.password 
+  9  |     await loginpage.openApplication()
+  10 |     await loginpage.login(usernamevalue,passwordvalue)
+> 11 |     await expect(page.locator('#nameofuser')).toContainText('Welcome');
+     |                                               ^ Error: expect(locator).toContainText(expected) failed
+  12 | })
+  13 | 
+  14 | 
+```

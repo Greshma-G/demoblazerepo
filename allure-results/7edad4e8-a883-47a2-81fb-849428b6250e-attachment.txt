@@ -1,0 +1,7 @@
+Filling name
+Filling country
+Filling city
+Filling credit card
+Filling month
+Filling year
+Clicking Purchase

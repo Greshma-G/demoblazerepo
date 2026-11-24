@@ -1,21 +1,30 @@
 
 import { test, expect } from '@playwright/test';
 import { PurchasePage } from '../Pages/purchasePage';
+import purchasecredentials from '../Utils/purchasecredentials.json';
 
 test.describe('Demoblaze Product Purchase', () => {
 
+    test.setTimeout(60000);
+
     let purchasePage;
 
-    const username = 'Greshma';
-    const password = '123456';
+    const username = purchasecredentials.username;
+    const password = purchasecredentials.password;
+    const name = purchasecredentials.name;
+    const country = purchasecredentials.country;
+    const city = purchasecredentials.city;
+    const creditCard = purchasecredentials.creditcard;
+    const month = purchasecredentials.month;
+    const year = purchasecredentials.year;
 
     const customerDetails = {
-        name: 'Greshma',
-        country: 'India',
-        city: 'Kerala',
-        creditCard: '1234567890123456',
-        month: 'November',
-        year: '2026'
+        name: name,
+        country: country,
+        city: city,
+        creditCard: creditCard,
+        month: month,
+        year: year
     };
 
     test.beforeEach(async ({ page }) => {
